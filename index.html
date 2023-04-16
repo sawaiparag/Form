@@ -1,0 +1,103 @@
+
+<html>
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>My Form</title>
+    
+    <!-- Import Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+  
+  <body>
+    <div class="container">
+      <h1>My Form</h1>
+      <form id="myForm">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="mobile">Mobile Number:</label>
+          <input type="tel" class="form-control" id="mobile" name="mobile" required>
+          <small id="mobileError" class="form-text text-danger d-none">Please enter a valid mobile number</small>
+        </div>
+        <div class="form-group">
+          <label for="dob">Date of Birth:</label>
+          <input type="date" class="form-control" id="dob" name="dob" required>
+        </div>
+        <div class="form-group">
+          <label for="qualification">Qualification:</label>
+          <select class="form-control" id="qualification" name="qualification" required>
+            <option value="">Select Qualification</option>
+            <option value="High School">High School</option>
+            <option value="Associate Degree">Associate Degree</option>
+            <option value="Bachelor's Degree">Bachelor's Degree</option>
+            <option value="Master's Degree">Master's Degree</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="skills">Skills:</label>
+          <textarea class="form-control" id="skills" name="skills" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="cv">Upload CV:</label>
+          <input type="file" class="form-control-file" id="cv" name="cv" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <!-- Define the success modal -->
+    <div class="modal" id="successModal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Congratulations, your form has been submitted!</p>
+      </div>
+    </div>
+
+    
+
+    <script>
+      // Get the form and the modal
+      var form = document.getElementById("myForm");
+      var modal = document.getElementById("successModal");
+
+      // When the user clicks on the submit button, validate the form
+      form.addEventListener("submit", function(event) {
+        // Prevent the form from submitting normally
+        event.preventDefault();
+
+        // Check if the form is invalid
+        if (form.checkValidity() === false) {
+          // Stop the event from propagating and show the validation errors
+          event.stopPropagation();
+          form.classList.add("was-validated");
+                 } else {
+          // If the form is valid, show the success modal and reset the form
+          alert("Congratulations, your form has been submitted!");
+          form.reset();
+        }
+    });
+
+
+    // Validate mobile number
+var mobileField = document.getElementById("mobile");
+
+mobileField.addEventListener("input", function(event) {
+  var regex = /^[0-9]{10}$/;
+  var isValid = regex.test(mobileField.value);
+  if (isValid) {
+    mobileField.setCustomValidity("");
+  } else {
+    mobileField.setCustomValidity("Please enter a valid 10-digit mobile number.");
+  }
+});
+
+  </script>
+     </body>
+</html>
